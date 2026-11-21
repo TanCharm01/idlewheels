@@ -50,6 +50,11 @@ class HostController extends Controller
     public function apply(): void
     {
         $user = Auth::requireLogin();
+        $existing = HostProfile::forUser((int) $user['id']);
+        if ($existing && $existing['status'] === 'approved') {
+            flash('info', 'You\'re already an approved host, so there\'s no need to apply again.');
+            redirect('/host');
+        }
         $data = $this->validate([
             'display_name' => 'required|min:2|max:100',
             'phone' => 'required|phone',

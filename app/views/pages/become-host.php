@@ -4,7 +4,7 @@
     <h1 class="mt-4 font-display text-[2.5rem] font-extrabold leading-[1.03] tracking-tight sm:text-6xl">Your car is parked. It could be earning</h1>
     <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">Rent your car to people nearby by the day, on the days it would otherwise sit idle. You set the price and decide which bookings to accept</p>
     <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-      <a href="<?= url('/host/apply') ?>" class="btn-primary px-8 py-4 text-base">Apply to host</a>
+      <a href="<?= url($isHost ? '/host' : '/host/apply') ?>" class="btn-primary px-8 py-4 text-base"><?= $isHost ? 'Go to host dashboard' : 'Apply to host' ?></a>
       <a href="#how" class="text-base font-semibold text-primary underline decoration-2 underline-offset-4">How hosting works</a>
     </div>
   </div>
@@ -55,5 +55,5 @@
 
 <section class="mx-4 mt-16 grid items-center gap-8 rounded-lg bg-ink px-6 py-14 text-ink-foreground sm:mx-8 sm:px-12 lg:mx-12 lg:grid-cols-[1fr_auto]">
   <h2 class="font-display text-3xl font-extrabold tracking-tight sm:text-4xl">Ready to put your car to work?</h2>
-  <a href="<?= url('/host/apply') ?>" class="justify-self-start rounded-control bg-ink-foreground px-8 py-4 text-base font-semibold text-ink no-underline hover:opacity-90">Apply to host</a>
+  <a href="<?= url($isHost ? '/host' : '/host/apply') ?>" class="justify-self-start rounded-control bg-ink-foreground px-8 py-4 text-base font-semibold text-ink no-underline hover:opacity-90"><?= $isHost ? 'Go to host dashboard' : 'Apply to host' ?></a>
 </section>

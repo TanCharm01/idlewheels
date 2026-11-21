@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Core\Auth;
 use App\Core\Controller;
 use App\Models\Car;
 use App\Models\Content;
+use App\Models\HostProfile;
 use App\Models\Setting;
 
 class PageController extends Controller
@@ -27,7 +29,10 @@ class PageController extends Controller
 
     public function becomeHost(): void
     {
+        $user = Auth::user();
+        $profile = $user ? HostProfile::forUser((int) $user['id']) : null;
         $this->view('pages/become-host', [
+            'isHost' => $profile && $profile['status'] === 'approved',
             'title' => 'Become a host',
             'description' => 'Rent out your car when you\'re not using it. Apply to host on IdleWheels.',
             'commission' => Setting::num('commission_percent', 15),

@@ -8,9 +8,15 @@
   </div>
   <div class="rounded-lg border border-border bg-background p-6 sm:p-10">
     <?php if ($profile && $profile['status'] === 'approved'): ?>
-      <p class="font-display text-2xl font-semibold">You're an approved host</p>
-      <p class="mt-2 text-muted-foreground">Add your car from the host dashboard. You can still update your details below.</p>
-    <?php elseif ($profile && $profile['status'] === 'pending'): ?>
+      <p class="eyebrow">Already a host</p>
+      <p class="mt-2 font-display text-2xl font-semibold">You're already an approved host</p>
+      <p class="mt-2 text-muted-foreground">Your application was approved<?= !empty($profile['updated_at']) ? ' on ' . e(fmt_date($profile['updated_at'])) : '' ?>, so there's no need to apply again. List a car or manage your bookings from the host dashboard.</p>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href="<?= url('/host') ?>" class="btn-primary">Go to host dashboard</a>
+        <a href="<?= url('/host/cars/new') ?>" class="btn-ghost">Add a car</a>
+      </div>
+    <?php else: ?>
+    <?php if ($profile && $profile['status'] === 'pending'): ?>
       <p class="mb-6 rounded-md bg-secondary p-4 text-sm">Your application is being reviewed. You can update your details below.</p>
     <?php elseif ($profile && $profile['status'] === 'rejected'): ?>
       <p class="mb-6 rounded-md bg-secondary p-4 text-sm">Your previous application wasn't approved<?= $profile['admin_note'] ? ': ' . e($profile['admin_note']) : '.' ?> Update your details and apply again.</p>
@@ -27,5 +33,6 @@
       <div class="sm:col-span-2"><?= error_for('agree') ?></div>
       <div class="sm:col-span-2"><button class="btn-primary"><?= $profile ? 'Update application' : 'Apply to host' ?></button></div>
     </form>
+    <?php endif; ?>
   </div>
 </section>
