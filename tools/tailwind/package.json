@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "description": "Builds assets/css/app.css from input.css. Not needed on the web host.",
+  "scripts": { "build": "tailwindcss -i input.css -o ../../assets/css/app.css --minify" },
+  "devDependencies": { "tailwindcss": "4.1.7", "@tailwindcss/cli": "4.1.7" }
+}

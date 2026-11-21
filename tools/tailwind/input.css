@@ -1,0 +1,74 @@
+/* build: cd tools/tailwind && npm run build */
+@import "tailwindcss";
+@source "../../app/views";
+@source "../../assets/js";
+
+@theme {
+  --color-background: hsl(45 33% 97%);
+  --color-foreground: hsl(195 35% 12%);
+  --color-primary: hsl(184 64% 24%);
+  --color-primary-foreground: hsl(45 33% 98%);
+  --color-secondary: hsl(170 30% 92%);
+  --color-secondary-foreground: hsl(195 35% 12%);
+  --color-accent: hsl(166 52% 34%);
+  --color-ink: hsl(195 38% 10%);
+  --color-ink-foreground: hsl(45 33% 96%);
+  --color-muted-foreground: hsl(195 12% 36%);
+  --color-border: hsl(180 14% 84%);
+  --color-destructive: hsl(4 70% 42%);
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-control: 9999px;
+
+  --font-sans: "Wix Madefor Text", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Wix Madefor Text", system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  button:disabled { cursor: not-allowed; }
+  summary::-webkit-details-marker { display: none; }
+}
+
+@layer components {
+  .eyebrow { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted-foreground); }
+  .btn-primary { @apply inline-flex items-center justify-center rounded-control bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground no-underline transition-opacity hover:opacity-90 disabled:opacity-45; }
+  .btn-ghost { @apply inline-flex items-center justify-center rounded-control border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground no-underline transition-colors hover:border-primary disabled:opacity-45; }
+  .btn-sm { @apply px-4 py-1.5 text-sm; }
+  .field { @apply w-full rounded-md border border-border bg-background px-3.5 py-2.5 text-base text-foreground outline-none transition-shadow focus:border-primary focus:ring-2 focus:ring-primary/25 disabled:opacity-60; }
+  .pw-wrap { @apply relative block; }
+  .pw-wrap .field { @apply pr-12; }
+  .pw-toggle { @apply absolute inset-y-0 right-0 flex w-12 cursor-pointer items-center justify-center rounded-r-md border-0 bg-transparent text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-primary; }
+  .field-label { @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground; }
+  .tab { @apply shrink-0 rounded-control px-4 py-2.5 text-left text-sm font-semibold no-underline hover:bg-secondary; }
+  .tab-active { @apply bg-primary text-primary-foreground hover:bg-primary; }
+  .stat { @apply block rounded-lg border border-border bg-background p-5; }
+  .stat-label { @apply text-xs uppercase tracking-wider text-muted-foreground; }
+  .stat-value { @apply mt-2 font-display text-3xl font-extrabold; }
+  .stat-hint { @apply mt-1 text-xs text-muted-foreground; }
+  .empty { @apply rounded-lg border border-dashed border-border p-10 text-center text-muted-foreground; }
+  .menu-item { @apply block px-4 py-2.5 text-sm text-foreground no-underline hover:bg-secondary; }
+  .footer-link { @apply text-inherit no-underline hover:text-ink-foreground; }
+  .flash { @apply rounded-md px-4 py-3 text-sm; }
+  .flash-success { @apply bg-secondary text-foreground; }
+  .flash-info { @apply bg-secondary text-foreground; }
+  .flash-error { @apply border border-destructive/40 bg-background text-destructive; }
+  .chip-check > span { @apply inline-block cursor-pointer rounded-control border border-border px-3.5 py-1.5 text-sm transition-colors hover:border-primary; }
+  .table { @apply w-full min-w-[40rem] text-left text-sm; }
+  .table thead { @apply bg-secondary text-xs uppercase tracking-wider text-muted-foreground; }
+  .table th, .table td { @apply px-4 py-3 align-top; }
+  .table tbody { @apply divide-y divide-border bg-background; }
+  .cal-nav { @apply h-9 w-9 rounded-control border border-border disabled:opacity-30; }
+  .cal-day { @apply rounded-sm py-2; }
+  .cal-free { @apply bg-secondary font-semibold text-primary; }
+  .cal-held { @apply text-muted-foreground line-through; }
+  .cal-past { @apply text-muted-foreground/40; }
+}

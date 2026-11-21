@@ -1,0 +1,15 @@
+# secrets
+.env
+
+# uploads
+uploads/*
+!uploads/.htaccess
+
+# css build tools
+tools/tailwind/node_modules/
+
+# editor files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
