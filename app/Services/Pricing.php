@@ -23,7 +23,12 @@ class Pricing
             if ($q <= 0) {
                 continue;
             }
-            $q = min($q, (int) $a['max_quantity'], $a['per_day'] ? max(1, $days) : (int) $a['max_quantity']);
+            if ((int) $a['max_quantity'] === 1) {
+                // yes/no extra: a per-day one is charged for every day of the rental
+                $q = $a['per_day'] ? max(1, $days) : 1;
+            } else {
+                $q = min($q, (int) $a['max_quantity'], $a['per_day'] ? max(1, $days) : (int) $a['max_quantity']);
+            }
             $lines[] = [
                 'addon_id' => (int) $a['id'],
                 'name' => $a['name'] . ($a['per_day'] ? ' (per day)' : ''),

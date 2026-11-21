@@ -55,10 +55,10 @@ INSERT INTO iw_car_photos (car_id, path, sort_order) VALUES
   (4, 'https://static.wixstatic.com/media/3e96a3_d7a859ffad4340ee8c55b2e6a5b9c99f~mv2.png', 0);
 
 INSERT INTO iw_addons (name, description, price, per_day, max_quantity, sort_order) VALUES
-  ('Driver hire', 'A professional driver for the day', 150.00, 1, 14, 10),
+  ('Driver hire', 'A professional driver for the day', 150.00, 1, 1, 10),
   ('Delivery to your address', 'The car is brought to you', 50.00, 0, 1, 20),
   ('Child seat', 'Fitted before pick-up', 20.00, 1, 14, 30),
-  ('GPS navigator', 'Portable sat-nav', 15.00, 1, 14, 40),
+  ('GPS navigator', 'Portable sat-nav', 15.00, 1, 1, 40),
   ('Fuel package', 'Return the car without refuelling', 400.00, 0, 1, 50);
 
 INSERT INTO iw_faqs (category, question, answer, sort_order) VALUES

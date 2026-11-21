@@ -200,7 +200,7 @@ $filterLinks = function (string $tab, string $param, array $options, string $cur
         <label><span class="field-label"><?= $a ? 'Name' : 'New extra' ?></span><input name="name" required maxlength="100" value="<?= e($a['name'] ?? '') ?>" class="field"></label>
         <label><span class="field-label">Description</span><input name="description" maxlength="200" value="<?= e($a['description'] ?? '') ?>" class="field"></label>
         <label><span class="field-label">Price (<?= e(currency()) ?>)</span><input type="number" name="price" required min="0" step="0.5" value="<?= e($a['price'] ?? '') ?>" class="field"></label>
-        <label><span class="field-label">Max qty</span><input type="number" name="max_quantity" required min="1" max="60" value="<?= e($a['max_quantity'] ?? 1) ?>" class="field"></label>
+        <label title="1 = a yes/no tick box for renters"><span class="field-label">Max qty (1 = yes/no)</span><input type="number" name="max_quantity" required min="1" max="60" value="<?= e($a['max_quantity'] ?? 1) ?>" class="field"></label>
         <div class="flex flex-wrap items-center gap-3 sm:col-span-5">
           <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="per_day" value="1" <?= !empty($a['per_day']) ? 'checked' : '' ?>> Priced per day</label>
           <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="active" value="1" <?= ($a === null || $a['active']) ? 'checked' : '' ?>> Offered to renters</label>

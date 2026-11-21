@@ -54,7 +54,13 @@
       var extras = 0;
       cfg.addons.forEach(function (a) {
         var input = form.querySelector('[data-addon="' + a.id + '"]');
-        var q = Math.max(0, Math.min(parseInt(input.value || "0", 10) || 0, a.max, a.perDay ? days : a.max));
+        var q;
+        if (input.type === "checkbox") {
+          // yes/no extra: a ticked per-day extra covers the whole rental
+          q = input.checked ? (a.perDay ? days : 1) : 0;
+        } else {
+          q = Math.max(0, Math.min(parseInt(input.value || "0", 10) || 0, a.max, a.perDay ? days : a.max));
+        }
         extras += q * a.price;
       });
       var fee = Math.round((rental + extras) * cfg.feePercent) / 100;

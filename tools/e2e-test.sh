@@ -89,7 +89,9 @@ echo "7. Featured listing (admin promotion) and revenue"
 tk=$(token admin "/admin?tab=cars&status=approved")
 post admin "/admin/cars/$CAR/feature" --data-urlencode "_token=$tk" -d "action=feature&days=7" >/dev/null
 check "$(curl -s "$B/" | grep -c "/cars/$SLUG")" "1" "featured car shows on the home page"
-check "$(curl -s -b "$T/admin" "$B/admin?tab=revenue" | grep -c 'GHS 39.60')" "1" "revenue: 27.00 commission + 12.60 fee"
+# expected = commission + fee of every paid booking in the last 90 days (includes any real bookings on this machine)
+REV=$(sql "SELECT FORMAT(COALESCE(SUM(commission + service_fee), 0), 2) FROM iw_bookings WHERE payment_status='paid' AND status IN ('confirmed','completed','awaiting_host') AND created_at >= CURDATE() - INTERVAL 90 DAY")
+check "$(curl -s -b "$T/admin" "$B/admin?tab=revenue" | grep -c "GHS $REV")" "1" "revenue: commission + fee totals (GHS $REV, incl. the test booking's 39.60)"
 
 echo "8. Every admin tab renders"
 for tab in overview hosts cars bookings users revenue addons categories reviews messages settings; do

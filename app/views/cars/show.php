@@ -135,17 +135,25 @@ $pricing = [
         <fieldset class="mt-6 border-t border-border pt-5">
           <legend class="field-label">Extras</legend>
           <ul class="grid gap-2">
+            <?php $hasCounts = false; ?>
             <?php foreach ($addons as $a): ?>
-              <li class="flex items-center justify-between gap-3 rounded-md border border-border px-3 py-2">
-                <span class="min-w-0">
-                  <span class="block text-sm font-medium"><?= e($a['name']) ?></span>
-                  <span class="text-xs text-muted-foreground"><?= e(money_short($a['price'])) ?><?= $a['per_day'] ? ' a day' : '' ?><?= $a['description'] ? ' · ' . e($a['description']) : '' ?></span>
-                </span>
-                <input type="number" name="addons[<?= (int) $a['id'] ?>]" min="0" max="<?= (int) $a['max_quantity'] ?>" value="0" class="field w-16 text-center" aria-label="How many: <?= e($a['name']) ?>" data-addon="<?= (int) $a['id'] ?>">
+              <?php $yesNo = (int) $a['max_quantity'] === 1; $hasCounts = $hasCounts || ($a['per_day'] && !$yesNo); ?>
+              <li>
+                <label class="flex cursor-pointer items-center justify-between gap-3 rounded-md border border-border px-3 py-2 has-[:checked]:border-primary">
+                  <span class="min-w-0">
+                    <span class="block text-sm font-medium"><?= e($a['name']) ?></span>
+                    <span class="text-xs text-muted-foreground"><?= e(money_short($a['price'])) ?><?= $a['per_day'] ? ' a day' : '' ?><?= $a['description'] ? ' · ' . e($a['description']) : '' ?></span>
+                  </span>
+                  <?php if ($yesNo): ?>
+                    <input type="checkbox" name="addons[<?= (int) $a['id'] ?>]" value="1" class="h-5 w-5 shrink-0 cursor-pointer accent-primary" aria-label="Add <?= e($a['name']) ?>" data-addon="<?= (int) $a['id'] ?>">
+                  <?php else: ?>
+                    <input type="number" name="addons[<?= (int) $a['id'] ?>]" min="0" max="<?= (int) $a['max_quantity'] ?>" value="0" class="field w-16 text-center" aria-label="How many: <?= e($a['name']) ?>" data-addon="<?= (int) $a['id'] ?>">
+                  <?php endif; ?>
+                </label>
               </li>
             <?php endforeach; ?>
           </ul>
-          <p class="mt-2 text-xs text-muted-foreground">Per-day extras: enter the number of days you need them.</p>
+          <p class="mt-2 text-xs text-muted-foreground">Ticked per-day extras are charged for every day of the rental.<?= $hasCounts ? ' For the others, enter how many days you need them.' : '' ?></p>
         </fieldset>
       <?php endif; ?>
 
