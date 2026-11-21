@@ -65,8 +65,8 @@ $action = $car ? url('/host/cars/' . $car['id']) : url('/host/cars');
 
     <fieldset class="grid gap-5">
       <legend class="mb-3 font-display text-xl font-semibold">Description</legend>
-      <label><span class="field-label">Short tagline</span><input name="tagline" maxlength="160" value="<?= e($val('tagline')) ?>" class="field" placeholder="e.g. Frugal city runabout"></label>
-      <label><span class="field-label">Description *</span><textarea name="description" rows="6" required maxlength="3000" class="field" placeholder="Condition, what it's good for, how hand-over works"><?= e($val('description')) ?></textarea><?= error_for('description') ?></label>
+      <label class="max-w-2xl"><span class="field-label">Short tagline</span><input name="tagline" maxlength="160" value="<?= e($val('tagline')) ?>" class="field" placeholder="e.g. Frugal city runabout"></label>
+      <label class="max-w-2xl"><span class="field-label">Description *</span><textarea name="description" rows="6" required maxlength="3000" class="field resize-y" placeholder="Condition, what it's good for, how hand-over works"><?= e($val('description')) ?></textarea><?= error_for('description') ?></label>
       <div>
         <span class="field-label">Features</span>
         <div class="flex flex-wrap gap-2">
